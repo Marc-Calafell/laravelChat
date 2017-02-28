@@ -24,4 +24,8 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
     Route::get('chat', 'ChatController@index')->name('chat');
 
+    Route::post('chat', 'ChatController@sendMessage');
+
+    Route::get('messages', 'ChatController@fetchMessages');
+
 });

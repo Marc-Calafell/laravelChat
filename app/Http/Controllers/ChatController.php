@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Message;
 use Auth;
 use Illuminate\Http\Request;
+
 /**
  * Class ChatController.
  *
@@ -20,6 +23,7 @@ class ChatController extends Controller
         $data = [];
         return view('chat',$data);
     }
+
     /**
      * Persist message to database
      *
@@ -30,11 +34,14 @@ class ChatController extends Controller
     public function sendMessage(Request $request)
     {
         $user = Auth::user();
+
         $user->messages()->create([
             'message' => $request->input('message')
         ]);
+
         return ['status' => 'Message Sent!'];
     }
+
     /**
      * Fetch all messages
      *
@@ -45,4 +52,5 @@ class ChatController extends Controller
         //Lazy loading -> Eager Loading
         return Message::with('user')->get();
     }
+
 }
